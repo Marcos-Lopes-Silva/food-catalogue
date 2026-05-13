@@ -1,3 +1,5 @@
+AIR ?= $(HOME)/go/bin/air
+
 .DEFAULT_GOAL := help
 
 .PHONY: help setup dev api-dev up down logs clean
@@ -13,7 +15,7 @@ dev: ## Inicia o frontend SvelteKit localmente (sem Docker)
 	npm run dev
 
 api-dev: ## Inicia a API Go com hot-reload via Air
-	cd apps/api && air
+	cd apps/api && $(AIR)
 
 up: ## Sobe toda a stack via Docker (produção, porta 80)
 	docker compose up -d --build
