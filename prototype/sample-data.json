@@ -1,0 +1,222 @@
+{
+    "title": "Cardápio Digital | Pizzaria Sol & Sabor",
+    "establishment": {
+        "name": "Pizzaria Sol & Sabor",
+        "category": "Pizza, Lanches e Sobremesas",
+        "status": "Aberto agora",
+        "openingHours": [
+            "Seg-Sex 18:00–23:30",
+            "Sáb-Dom 18:00–00:00"
+        ],
+        "priceRange": "$$",
+        "servesCuisine": [
+            "Italiana",
+            "Brasileira"
+        ],
+        "address": "R. das Flores, 123 · Ribeirão Preto",
+        "phone": "+55 (16) 99999-9999",
+        "whatsapp": "+55 (16) 99999-9999",
+        "logo": "https://via.placeholder.com/120x120?text=Logo",
+        "banner": "https://via.placeholder.com/1200x420?text=Banner"
+    },
+    "url": "https://solesabor.example.com",
+    "hasMenu": {
+        "@type": "Menu",
+        "hasMenuSection": [
+            {
+                "@type": "MenuSection",
+                "name": "Pizzas",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "Marguerita",
+                        "description": "Molho de tomate, mussarela, manjericão e azeite.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "34.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Portuguesa",
+                        "description": "Presunto, cebola, ovo e azeitonas.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "39.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Quatro Queijos",
+                        "description": "Mussarela, provolone, gorgonzola e parmesão.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "42.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Lanches",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "X-Burguer",
+                        "description": "Pão, carne, queijo, alface e tomate.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "24.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Coxinha de Frango",
+                        "description": "Coxa recheada com frango desfiado.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "8.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Sobremesas",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "Brownie de Nutella",
+                        "description": "Brownie quente com sorvete de creme.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "18.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Pudim",
+                        "description": "Pudim de leite com calda de caramelo.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "12.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "filters": [
+        "Pizza",
+        "Hambúrguer",
+        "Japonês",
+        "Drinks",
+        "Sobremesa"
+    ],
+    "highlights": [
+        {
+            "title": "Pizza Margherita",
+            "subtitle": "Mussarela, manjericão e tomate",
+            "price": "R$ 29,90"
+        },
+        {
+            "title": "Combo Família",
+            "subtitle": "3 pizzas médias + refri 2L",
+            "price": "R$ 89,90"
+        },
+        {
+            "title": "Salgado Frito",
+            "subtitle": "Coxinha, quibe e pastel",
+            "price": "R$ 24,90"
+        }
+    ],
+    "sections": [
+        {
+            "id": "pizzas",
+            "name": "Pizzas",
+            "items": [
+                {
+                    "name": "Marguerita",
+                    "description": "Molho de tomate, mussarela, manjericão e azeite.",
+                    "price": "R$ 34,90",
+                    "status": "Disponível",
+                    "badge": "Destaque",
+                    "variation": "Tamanhos P/M/G"
+                },
+                {
+                    "name": "Portuguesa",
+                    "description": "Presunto, cebola, ovo e azeitonas.",
+                    "price": "R$ 39,90",
+                    "status": "Disponível",
+                    "badge": "Promoção",
+                    "variation": "Opções de borda"
+                },
+                {
+                    "name": "Quatro Queijos",
+                    "description": "Mussarela, provolone, gorgonzola e parmesão.",
+                    "price": "R$ 42,90",
+                    "status": "Indisponível",
+                    "variation": "Sem glúten"
+                }
+            ]
+        },
+        {
+            "id": "lanches",
+            "name": "Lanches",
+            "items": [
+                {
+                    "name": "X-Burguer",
+                    "description": "Pão, carne, queijo, alface e tomate.",
+                    "price": "R$ 24,90",
+                    "status": "Disponível",
+                    "variation": "Padrão ou duplo"
+                },
+                {
+                    "name": "Coxinha de Frango",
+                    "description": "Coxa recheada com frango desfiado.",
+                    "price": "R$ 8,90",
+                    "status": "Disponível",
+                    "variation": "Kits 1, 2 ou 6"
+                }
+            ]
+        },
+        {
+            "id": "sobremesas",
+            "name": "Sobremesas",
+            "items": [
+                {
+                    "name": "Brownie de Nutella",
+                    "description": "Brownie quente com sorvete de creme.",
+                    "price": "R$ 18,90",
+                    "status": "Disponível",
+                    "variation": "Com cobertura extra"
+                },
+                {
+                    "name": "Pudim",
+                    "description": "Pudim de leite com calda de caramelo.",
+                    "price": "R$ 12,90",
+                    "status": "Disponível",
+                    "variation": "Opcional chantilly"
+                }
+            ]
+        }
+    ],
+    "orderSummary": {
+        "subtotal": "R$ 0,00",
+        "delivery": "R$ 9,90",
+        "total": "R$ 0,00",
+        "pickup": "Retirada disponível",
+        "payment": "Pix, Cartão ou Dinheiro"
+    },
+    "footer": {
+        "city": "Ribeirão Preto",
+        "directoryUrl": "/ribeirao-preto"
+    }
+}
