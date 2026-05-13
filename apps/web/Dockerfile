@@ -1,15 +1,12 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
-
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY package.json package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
-RUN pnpm install --filter @food-catalogue/web --frozen-lockfile
+RUN npm ci
 
 COPY apps/web ./apps/web
-WORKDIR /app/apps/web
-RUN pnpm build
+RUN npm run build -w @food-catalogue/web
 
 FROM node:22-alpine AS runner
 WORKDIR /app

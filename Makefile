@@ -6,11 +6,11 @@ help: ## Lista os comandos disponíveis
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 setup: ## Instala dependências JS e gera go.sum
-	pnpm install
+	npm install
 	cd apps/api && go mod tidy
 
 dev: ## Inicia o frontend SvelteKit localmente (sem Docker)
-	pnpm dev
+	npm run dev
 
 api-dev: ## Inicia a API Go com hot-reload via Air
 	cd apps/api && air

@@ -7,12 +7,11 @@
 | Frontend | SvelteKit 5 + TypeScript |
 | Backend | Go 1.23 + Echo v4 |
 | Proxy | Nginx |
-| Monorepo | pnpm workspaces |
+| Monorepo | npm workspaces |
 
 ## Pré-requisitos
 
 - [Node.js 22+](https://nodejs.org)
-- [pnpm 9+](https://pnpm.io/installation) — `npm install -g pnpm`
 - [Go 1.23+](https://go.dev/dl/)
 - [Docker + Docker Compose](https://docs.docker.com/get-docker/)
 - [Air](https://github.com/air-verse/air) (hot-reload Go) — `go install github.com/air-verse/air@latest`

@@ -1,10 +1,12 @@
 {
   "name": "food-catalogue",
   "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
   "scripts": {
-    "dev": "pnpm --filter @food-catalogue/web dev",
-    "build": "pnpm --filter @food-catalogue/web build",
-    "check": "pnpm --filter @food-catalogue/web check"
-  },
-  "packageManager": "pnpm@9.15.0"
+    "dev": "npm run dev -w @food-catalogue/web",
+    "build": "npm run build -w @food-catalogue/web",
+    "check": "npm run check -w @food-catalogue/web"
+  }
 }
