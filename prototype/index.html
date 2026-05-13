@@ -7,6 +7,46 @@
     <meta name="description" content="Cardápio digital do estabelecimento com menu, destaques, busca e carrinho." />
     <meta property="og:title" content="{{ .establishment.name }}" />
     <meta property="og:description" content="Menu online com pedidos, promoções e catálogo completo." />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "{{ .establishment.name }}",
+        "url": "{{ .establishment.url }}",
+        "telephone": "{{ .establishment.phone }}",
+        "priceRange": "{{ .establishment.priceRange }}",
+        "servesCuisine": [{{ range $i, $c := .establishment.servesCuisine }}{{ if $i }}, {{ end }}"{{ $c }}"{{ end }}],
+        "openingHours": [{{ range $i, $h := .establishment.openingHours }}{{ if $i }}, {{ end }}"{{ $h }}"{{ end }}],
+        "address": "{{ .establishment.address }}",
+        "hasMenu": {
+            "@type": "Menu",
+            "hasMenuSection": [
+                {{ range $si, $section := .hasMenu.hasMenuSection }}
+                {{ if $si }},{{ end }}
+                {
+                    "@type": "MenuSection",
+                    "name": "{{ $section.name }}",
+                    "hasMenuItem": [
+                        {{ range $ii, $item := $section.hasMenuItem }}
+                        {{ if $ii }},{{ end }}
+                        {
+                            "@type": "MenuItem",
+                            "name": "{{ $item.name }}",
+                            "description": "{{ $item.description }}",
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "{{ $item.offers.price }}",
+                                "priceCurrency": "{{ $item.offers.priceCurrency }}"
+                            }
+                        }
+                        {{ end }}
+                    ]
+                }
+                {{ end }}
+            ]
+        }
+    }
+    </script>
     <link rel="stylesheet" href="normalize.css">
     <style>
         :root {
@@ -93,8 +133,16 @@
                     <span>{{ .establishment.status }}</span>
                 </div>
                 <div class="hero-chip">
-                    <strong>Horário</strong>
-                    <span>{{ .establishment.hours }}</span>
+                    <strong>Horários</strong>
+                    <span>{{ range $idx, $hour := .establishment.openingHours }}{{ if $idx }} · {{ end }}{{ $hour }}{{ end }}</span>
+                </div>
+                <div class="hero-chip">
+                    <strong>Preço</strong>
+                    <span>{{ .establishment.priceRange }}</span>
+                </div>
+                <div class="hero-chip">
+                    <strong>Cozinha</strong>
+                    <span>{{ range $idx, $cuisine := .establishment.servesCuisine }}{{ if $idx }} · {{ end }}{{ $cuisine }}{{ end }}</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Contato</strong>

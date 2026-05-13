@@ -4,12 +4,114 @@
         "name": "Pizzaria Sol & Sabor",
         "category": "Pizza, Lanches e Sobremesas",
         "status": "Aberto agora",
-        "hours": "Seg-Sex 18:00–23:30 · Sáb-Dom 18:00–00:00",
+        "openingHours": [
+            "Seg-Sex 18:00–23:30",
+            "Sáb-Dom 18:00–00:00"
+        ],
+        "priceRange": "R$",
+        "servesCuisine": [
+            "Italiana",
+            "Brasileira"
+        ],
         "address": "R. das Flores, 123 · Ribeirão Preto",
         "phone": "+55 (16) 99999-9999",
         "whatsapp": "+55 (16) 99999-9999",
         "logo": "https://via.placeholder.com/120x120?text=Logo",
         "banner": "https://via.placeholder.com/1200x420?text=Banner"
+    },
+    "url": "https://solesabor.example.com",
+    "hasMenu": {
+        "@type": "Menu",
+        "hasMenuSection": [
+            {
+                "@type": "MenuSection",
+                "name": "Pizzas",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "Marguerita",
+                        "description": "Molho de tomate, mussarela, manjericão e azeite.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "34.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Portuguesa",
+                        "description": "Presunto, cebola, ovo e azeitonas.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "39.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Quatro Queijos",
+                        "description": "Mussarela, provolone, gorgonzola e parmesão.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "42.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Lanches",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "X-Burguer",
+                        "description": "Pão, carne, queijo, alface e tomate.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "24.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Coxinha de Frango",
+                        "description": "Coxa recheada com frango desfiado.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "8.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "MenuSection",
+                "name": "Sobremesas",
+                "hasMenuItem": [
+                    {
+                        "@type": "MenuItem",
+                        "name": "Brownie de Nutella",
+                        "description": "Brownie quente com sorvete de creme.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "18.90",
+                            "priceCurrency": "BRL"
+                        }
+                    },
+                    {
+                        "@type": "MenuItem",
+                        "name": "Pudim",
+                        "description": "Pudim de leite com calda de caramelo.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "12.90",
+                            "priceCurrency": "BRL"
+                        }
+                    }
+                ]
+            }
+        ]
     },
     "filters": [
         "Pizza",
