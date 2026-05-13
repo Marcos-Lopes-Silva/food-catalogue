@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# SvelteKit
+apps/web/.svelte-kit/
+apps/web/build/
+
+# Go
+apps/api/tmp/
+apps/api/server
+
+# Environment
+.env
+*.env.local
+
+# Docker
+.docker/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,10 @@
+{
+  "name": "food-catalogue",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @food-catalogue/web dev",
+    "build": "pnpm --filter @food-catalogue/web build",
+    "check": "pnpm --filter @food-catalogue/web check"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
