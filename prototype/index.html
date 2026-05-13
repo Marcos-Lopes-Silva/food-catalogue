@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .title }}</title>
+    <title>{{ .Title }}</title>
     <meta name="description" content="Cardápio digital do estabelecimento com menu, destaques, busca e carrinho." />
-    <meta property="og:title" content="{{ .establishment.name }}" />
+    <meta property="og:title" content="{{ .Establishment.Name }}" />
     <meta property="og:description" content="Menu online com pedidos, promoções e catálogo completo." />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Restaurant",
-        "name": "{{ .establishment.name }}",
-        "url": "{{ .establishment.url }}",
-        "telephone": "{{ .establishment.phone }}",
-        "priceRange": "{{ .establishment.priceRange }}",
-        "servesCuisine": [{{ range $i, $c := .establishment.servesCuisine }}{{ if $i }}, {{ end }}"{{ $c }}"{{ end }}],
-        "openingHours": [{{ range $i, $h := .establishment.openingHours }}{{ if $i }}, {{ end }}"{{ $h }}"{{ end }}],
-        "address": "{{ .establishment.address }}",
+        "name": "{{ .Establishment.Name }}",
+        "url": "{{ .URL }}",
+        "telephone": "{{ .Establishment.Phone }}",
+        "priceRange": "{{ .Establishment.PriceRange }}",
+        "servesCuisine": [{{ range $i, $c := .Establishment.ServesCuisine }}{{ if $i }}, {{ end }}"{{ $c }}"{{ end }}],
+        "openingHours": [{{ range $i, $h := .Establishment.OpeningHours }}{{ if $i }}, {{ end }}"{{ $h }}"{{ end }}],
+        "address": "{{ .Establishment.Address }}",
         "hasMenu": {
             "@type": "Menu",
             "hasMenuSection": [
-                {{ range $si, $section := .hasMenu.hasMenuSection }}
+                {{ range $si, $section := .HasMenu.HasMenuSection }}
                 {{ if $si }},{{ end }}
                 {
                     "@type": "MenuSection",
-                    "name": "{{ $section.name }}",
+                    "name": "{{ $section.Name }}",
                     "hasMenuItem": [
-                        {{ range $ii, $item := $section.hasMenuItem }}
+                        {{ range $ii, $item := $section.HasMenuItem }}
                         {{ if $ii }},{{ end }}
                         {
                             "@type": "MenuItem",
-                            "name": "{{ $item.name }}",
-                            "description": "{{ $item.description }}",
+                            "name": "{{ $item.Name }}",
+                            "description": "{{ $item.Description }}",
                             "offers": {
                                 "@type": "Offer",
-                                "price": "{{ $item.offers.price }}",
-                                "priceCurrency": "{{ $item.offers.priceCurrency }}"
+                                "price": "{{ $item.Offers.Price }}",
+                                "priceCurrency": "{{ $item.Offers.PriceCurrency }}"
                             }
                         }
                         {{ end }}
@@ -120,37 +120,37 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-brand">
-                    <img src="{{ .establishment.logo }}" alt="Logo {{ .establishment.name }}">
+                    <img src="{{ .Establishment.Logo }}" alt="Logo {{ .Establishment.Name }}">
                     <div>
-                        <p class="hero-title">{{ .establishment.name }}</p>
-                        <p class="hero-subtitle">{{ .establishment.category }}</p>
+                        <p class="hero-title">{{ .Establishment.Name }}</p>
+                        <p class="hero-subtitle">{{ .Establishment.Category }}</p>
                     </div>
                 </div>
             </div>
             <div class="hero-meta">
                 <div class="hero-chip">
                     <strong>Status</strong>
-                    <span>{{ .establishment.status }}</span>
+                    <span>{{ .Establishment.Status }}</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Horários</strong>
-                    <span>{{ range $idx, $hour := .establishment.openingHours }}{{ if $idx }} · {{ end }}{{ $hour }}{{ end }}</span>
+                    <span>{{ range $idx, $hour := .Establishment.OpeningHours }}{{ if $idx }} · {{ end }}{{ $hour }}{{ end }}</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Preço</strong>
-                    <span>{{ .establishment.priceRange }}</span>
+                    <span>{{ .Establishment.PriceRange }}</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Cozinha</strong>
-                    <span>{{ range $idx, $cuisine := .establishment.servesCuisine }}{{ if $idx }} · {{ end }}{{ $cuisine }}{{ end }}</span>
+                    <span>{{ range $idx, $cuisine := .Establishment.ServesCuisine }}{{ if $idx }} · {{ end }}{{ $cuisine }}{{ end }}</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Contato</strong>
-                    <span>{{ .establishment.phone }} · WhatsApp</span>
+                    <span>{{ .Establishment.Phone }} · WhatsApp</span>
                 </div>
                 <div class="hero-chip">
                     <strong>Local</strong>
-                    <span>{{ .establishment.address }}</span>
+                    <span>{{ .Establishment.Address }}</span>
                 </div>
             </div>
         </section>
@@ -163,45 +163,45 @@
                         <button>Buscar</button>
                     </div>
                     <div class="pills">
-                        {{ range .filters }}
+                        {{ range .Filters }}
                         <span class="pill">{{ . }}</span>
                         {{ end }}
                     </div>
                     <div class="carousel">
                         <h3>Destaques</h3>
-                        {{ range .highlights }}
+                        {{ range .Highlights }}
                         <article class="carousel-card">
-                            <strong>{{ .title }}</strong>
-                            <span>{{ .subtitle }}</span>
-                            <span>{{ .price }}</span>
+                            <strong>{{ .Title }}</strong>
+                            <span>{{ .Subtitle }}</span>
+                            <span>{{ .Price }}</span>
                         </article>
                         {{ end }}
                     </div>
                     <div class="section-nav">
-                        {{ range .sections }}
-                        <a href="#{{ .id }}">{{ .name }}</a>
+                        {{ range .Sections }}
+                        <a href="#{{ .ID }}">{{ .Name }}</a>
                         {{ end }}
                     </div>
-                    {{ range .sections }}
-                    <section id="{{ .id }}" class="menu-section">
+                    {{ range .Sections }}
+                    <section id="{{ .ID }}" class="menu-section">
                         <div class="menu-header">
-                            <h2>{{ .name }}</h2>
-                            <span>{{ len .items }} itens</span>
+                            <h2>{{ .Name }}</h2>
+                            <span>{{ len .Items }} itens</span>
                         </div>
                         <div class="menu-grid">
-                            {{ range .items }}
-                            <article class="item-card {{ if eq .status "Indisponível" }}disabled{{ end }}">
+                            {{ range .Items }}
+                            <article class="item-card {{ if eq .Status "Indisponível" }}disabled{{ end }}">
                                 <div class="item-top">
                                     <div>
-                                        {{ if .badge }}<div class="item-tag">{{ .badge }}</div>{{ end }}
-                                        <p class="item-title">{{ .name }}</p>
+                                        {{ if .Badge }}<div class="item-tag">{{ .Badge }}</div>{{ end }}
+                                        <p class="item-title">{{ .Name }}</p>
                                     </div>
-                                    <span class="item-price">{{ .price }}</span>
+                                    <span class="item-price">{{ .Price }}</span>
                                 </div>
-                                <p class="item-desc">{{ .description }}</p>
+                                <p class="item-desc">{{ .Description }}</p>
                                 <div class="item-meta">
-                                    <span class="item-status">{{ .status }}</span>
-                                    <span>{{ .variation }}</span>
+                                    <span class="item-status">{{ .Status }}</span>
+                                    <span>{{ .Variation }}</span>
                                 </div>
                                 <div class="item-actions">
                                     <button>Ver detalhes</button>
@@ -229,18 +229,18 @@
                 <div class="sidebar-summary">
                     <div class="panel-block">
                         <strong>Resumo rápido</strong>
-                        <div class="summary-row"><span>Sub-total</span><span>{{ .orderSummary.subtotal }}</span></div>
-                        <div class="summary-row"><span>Entrega</span><span>{{ .orderSummary.delivery }}</span></div>
-                        <div class="summary-total"><span>Total estimado</span><span>{{ .orderSummary.total }}</span></div>
+                        <div class="summary-row"><span>Sub-total</span><span>{{ .OrderSummary.Subtotal }}</span></div>
+                        <div class="summary-row"><span>Entrega</span><span>{{ .OrderSummary.Delivery }}</span></div>
+                        <div class="summary-total"><span>Total estimado</span><span>{{ .OrderSummary.Total }}</span></div>
                     </div>
                     <div class="panel-block">
                         <strong>Recebimento</strong>
-                        <p>{{ .orderSummary.pickup }}</p>
+                        <p>{{ .OrderSummary.Pickup }}</p>
                         <p style="margin-top: 8px;">Modalidades de entrega e retirada disponíveis.</p>
                     </div>
                     <div class="panel-block">
                         <strong>Pagamento</strong>
-                        <p>{{ .orderSummary.payment }}</p>
+                        <p>{{ .OrderSummary.Payment }}</p>
                     </div>
                     <div class="panel-block">
                         <strong>Cupom</strong>
@@ -251,9 +251,9 @@
         </div>
 
         <footer class="footer">
-            <p>Diretório público: <strong>{{ .footer.city }}</strong></p>
+            <p>Diretório público: <strong>{{ .Footer.City }}</strong></p>
             <p>Filtro por categoria, ordenação por avaliação, taxa e tempo de entrega.</p>
-            <p>Link para diretório: <a href="{{ .footer.directoryUrl }}">{{ .footer.directoryUrl }}</a></p>
+            <p>Link para diretório: <a href="{{ .Footer.DirectoryURL }}">{{ .Footer.DirectoryURL }}</a></p>
         </footer>
     </div>
 </body>

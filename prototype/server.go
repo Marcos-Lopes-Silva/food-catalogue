@@ -7,6 +7,8 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+
+	"github.com/Marcos-Lopes-Silva/food-catalogue/prototype/models"
 )
 
 /**
@@ -14,8 +16,8 @@ Isso aqui é só pra renderizar o template index.html com base no Json.
 Atualizando tanto o json quanto o template vai atualizar o resultado ao atualizar a página.
 */
 
-func getData() map[string]any {
-	data := map[string]any{}
+func getData() *models.Data {
+	data := &models.Data{}
 	file, err := os.Open("sample-data.json")
 	if err != nil {
 		panic(err)
