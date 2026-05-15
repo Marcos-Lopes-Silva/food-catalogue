@@ -16,82 +16,88 @@ Plataforma SaaS multi-tenant que permite a estabelecimentos do setor alimentíci
 
 ### 2.1 Catálogo do Estabelecimento
 
+> Os dados públicos do estabelecimento devem expor visualmente os campos pertinentes de `schema.org/FoodEstablishment`, não apenas no JSON-LD, para que o usuário veja claramente informações como endereço, telefone, cozinha, faixa de preço, horário de funcionamento, avaliação e menu.
+
+
+
 | ID | Requisito |
 |----|-----------|
 | F01 | Cada estabelecimento possui uma URL própria no padrão `<slug>.dominio.com.br` |
-| F02 | Página do estabelecimento exibe: banner de capa, logo, nome, categoria, horários de funcionamento e status (aberto/fechado) |
+| F02 | Página do estabelecimento exibe: banner de capa, logo, nome, categoria, tipo de cozinha (`servesCuisine`), faixa de preço (`priceRange`), horários de funcionamento e status (aberto/fechado) |
 | F03 | O cardápio é organizado em seções configuráveis pelo estabelecimento |
 | F04 | Cada item do cardápio contém: nome, descrição completa, preço, foto e disponibilidade (ativo/inativo) |
+|F04a| Cada item do cardápio possui também uma URL própria para ser compartilhavel e o JSON-LD de [MenuItem](https://schema.org/MenuItem) para ser localizado em resultados de busca |
 | F05 | Itens podem ter variações (ex: tamanho P/M/G) e complementos/adicionais com preço individual |
+| F05a | Os modificadores dos items devem ser apresentados em URL queries para serem compartilhaveis |
 | F06 | O estabelecimento pode marcar itens como "Destaque" e "Promoção" |
 | F07 | Promoções suportam: desconto percentual, desconto fixo e combos |
 | F08 | O cardápio exibe os destaques em carrossel no topo antes das seções |
-| F09 | Seções e itens podem ser reordenados via drag-and-drop no painel admin |
-| F10 | Itens fora de estoque são exibidos como indisponíveis sem remover do cardápio |
+| F9 | Itens fora de estoque são exibidos como indisponíveis sem remover do cardápio |
 
 ### 2.2 Busca e Navegação
 
 | ID | Requisito |
 |----|-----------|
-| F11 | Busca com resultados em tempo real a cada caractere digitado (diferencial vs. Zerofila) |
-| F12 | Resultados de busca exibidos inline na mesma tela, sem redirecionar para página separada (diferencial vs. Zerofila) |
-| F13 | Filtro rápido por categoria clicável na tela de busca |
-| F14 | Navbar/select de seções com smooth scroll até a seção correspondente |
-| F15 | Âncora na URL para cada seção (ex: `#pizzas`) permitindo compartilhamento direto |
+| F10 | Busca com resultados em tempo real a cada caractere digitado com tolerância à erros de digitação (diferencial vs. Zerofila) |
+| F11 | Resultados de busca exibidos inline na mesma tela, sem redirecionar para página separada (diferencial vs. Zerofila) |
+| F12 | Filtro rápido por categoria clicável na tela de busca |
+| F13 | Navbar/select de seções com smooth scroll até a seção correspondente |
+| F14 | Âncora na URL para cada seção (ex: `#pizzas`) permitindo compartilhamento direto |
 
 ### 2.3 Pedido e Carrinho
 
 | ID | Requisito |
 |----|-----------|
-| F16 | Ao clicar em um item, uma bottom sheet/modal exibe foto ampliada, descrição, variações, complementos, campo de observações e contador de quantidade |
-| F17 | Campo de observações com limite configurável pelo estabelecimento (padrão 180 caracteres) |
-| F18 | Carrinho persistido em `localStorage` para não perder itens ao navegar |
-| F19 | Revisão do pedido exibe: itens, subtotal, taxa de entrega estimada e total |
-| F20 | Suporte a código de cupom com validação em tempo real |
-| F21 | Modalidades de recebimento: entrega e retirada no local (configuráveis por estabelecimento) |
-| F22 | Cálculo de taxa de entrega por CEP com integração a API de frete ou tabela manual |
-| F23 | Tempo estimado de entrega exibido antes da finalização do pedido |
+| F15 | Ao clicar em um item, uma bottom sheet/modal exibe foto ampliada, descrição, variações, complementos, campo de observações e contador de quantidade |
+| F16 | Campo de observações com limite configurável pelo estabelecimento (padrão 180 caracteres) |
+| F17 | Carrinho persistido em `localStorage` para não perder itens ao navegar |
+| F18 | Revisão do pedido exibe: itens, subtotal, taxa de entrega estimada e total |
+| F19 | Suporte a código de cupom com validação em tempo real |
+| F20 | Modalidades de recebimento: entrega e retirada no local (configuráveis por estabelecimento) |
+| F21 | Cálculo de taxa de entrega por CEP com integração a API de frete ou tabela manual |
+| F22 | Tempo estimado de entrega exibido antes da finalização do pedido |
 
 ### 2.4 Pagamento
 
 | ID | Requisito |
 |----|-----------|
-| F24 | Formas de pagamento na entrega: dinheiro (com troco), crédito, débito, voucher alimentação |
-| F25 | Pagamento online via Pix (geração de QR Code dinâmico) |
-| F26 | Pagamento online via cartão de crédito/débito (integração com gateway: Stripe, PagSeguro ou Mercado Pago) |
-| F27 | Solicitação opcional de CPF/CNPJ na nota |
+| F23 | Formas de pagamento na entrega: dinheiro (com troco), crédito, débito, voucher alimentação |
+| F24 | Pagamento online via Pix (geração de QR Code dinâmico) |
+| F25 | Pagamento online via cartão de crédito/débito (integração com gateway: Stripe, PagSeguro ou Mercado Pago) |
+| F26 | Solicitação opcional de CPF/CNPJ na nota |
 
 ### 2.5 Conta do Consumidor
 
 | ID | Requisito |
 |----|-----------|
-| F28 | Pedido sem cadastro obrigatório (apenas nome e telefone) |
-| F29 | Opção de criar conta para salvar endereços, histórico de pedidos e dados de pagamento |
-| F30 | Login via e-mail/senha, Google e número de telefone (OTP via SMS ou WhatsApp) |
-| F31 | Histórico de pedidos com opção de "repetir pedido" |
+| F27 | Pedido sem cadastro obrigatório (apenas nome e telefone) |
+| F28 | Opção de criar conta para salvar endereços, histórico de pedidos e dados de pagamento além de cupons |
+| F29 | Login via e-mail/senha, Google e número de telefone (OTP via SMS ou WhatsApp) |
+| F30 | Histórico de pedidos com opção de "repetir pedido" |
 
 ### 2.6 Rastreamento do Pedido
 
 | ID | Requisito |
 |----|-----------|
-| F32 | Página de status do pedido com etapas: Recebido → Em preparo → Saiu para entrega → Entregue |
-| F33 | Notificação de atualização de status via WhatsApp (Business API) ou SMS |
-| F34 | Link de acompanhamento enviado ao consumidor após confirmação do pedido |
+| F31 | Página de status do pedido com etapas: Recebido → Em preparo → Saiu para entrega → Entregue |
+| F32 | Notificação de atualização de status via WhatsApp (Business API) ou SMS |
+| F33 | Link de acompanhamento enviado ao consumidor após confirmação do pedido |
 
 ### 2.7 Avaliações
 
 | ID | Requisito |
 |----|-----------|
-| F35 | Consumidores podem avaliar o estabelecimento (1–5 estrelas) após entrega confirmada |
-| F36 | Avaliações exibidas publicamente na página do estabelecimento com média e total de avaliações |
-| F37 | Estabelecimento pode responder avaliações |
+| F34 | Consumidores podem avaliar o estabelecimento (1–5 estrelas) após entrega confirmada |
+| F35 | Avaliações exibidas publicamente na página do estabelecimento com média e total de avaliações |
+| F36 | Estabelecimento pode responder avaliações com notificação ao usuário por whatsapp ou email |
 
 ### 2.8 Painel Administrativo do Estabelecimento
 
 | ID | Requisito |
 |----|-----------|
-| F38 | Dashboard com: pedidos do dia, faturamento, ticket médio e avaliação média |
-| F39 | Gestão completa do cardápio (seções, itens, fotos, preços, disponibilidade) |
+| F37 | Dashboard com: pedidos do dia, faturamento, ticket médio e avaliação média |
+| F38 | Gestão completa do cardápio (seções, itens, fotos, preços, disponibilidade) |
+| F39 | Seções e itens podem ser reordenados via drag-and-drop |
 | F40 | Gestão de pedidos em tempo real com notificação sonora e visual para novos pedidos |
 | F41 | Impressão ou envio automático do pedido para impressora térmica (protocolo ESC/POS) |
 | F42 | Configuração de horários de funcionamento por dia da semana |
@@ -99,6 +105,7 @@ Plataforma SaaS multi-tenant que permite a estabelecimentos do setor alimentíci
 | F44 | Relatórios exportáveis em CSV/PDF: vendas por período, itens mais vendidos, cupons utilizados |
 | F45 | Gestão de cupons de desconto com validade, limite de usos e valor mínimo de pedido |
 | F46 | Upload em lote de itens via planilha CSV |
+
 
 ### 2.9 Diretório Público (diferencial vs. concorrentes ponto a ponto)
 
@@ -130,7 +137,7 @@ Plataforma SaaS multi-tenant que permite a estabelecimentos do setor alimentíci
 | ID | Requisito |
 |----|-----------|
 | NF08 | Cada página de estabelecimento com meta tags Open Graph e Twitter Card para compartilhamento em redes sociais |
-| NF09 | Structured data (JSON-LD) seguindo schema.org `Restaurant` e `Menu` para indexação rica no Google |
+| NF09 | Structured data (JSON-LD) seguindo schema.org `FoodEstablishment` e `Menu`, com atributos visíveis na UI como nome, imagem, endereço, telefone, horários, faixa de preço e avaliação |
 | NF10 | URLs canônicas, sitemap.xml e robots.txt gerados automaticamente |
 | NF11 | SSR (Server-Side Rendering) ou SSG para as páginas públicas do cardápio |
 
