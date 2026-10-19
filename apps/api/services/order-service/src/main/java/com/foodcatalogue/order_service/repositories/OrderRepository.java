@@ -1,0 +1,11 @@
+package com.foodcatalogue.order_service.repositories;
+
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.foodcatalogue.order_service.models.Order;
+
+public interface OrderRepository extends JpaRepository<Order, UUID> {
+    
+}
