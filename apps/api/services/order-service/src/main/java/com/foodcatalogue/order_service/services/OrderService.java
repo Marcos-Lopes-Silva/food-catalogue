@@ -68,4 +68,12 @@ public class OrderService {
         return "Order deleted successfully";
     }
 
+    public List<ResponseOrder> getOrdersByUserId(UUID userId, int page, int size, String sortBy, String sortOrder) {
+        var orders = this.orderRepository.findByUserId(userId, page, size, sortBy, sortOrder);
+
+        return orders.stream()
+                .map(ResponseOrder::fromEntity)
+                .collect(Collectors.toList());
+    }
+
 }
