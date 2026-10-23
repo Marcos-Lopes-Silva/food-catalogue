@@ -43,6 +43,14 @@ spring:
                 - StripPrefix=1
                 - AddRequestHeader=X-Forwarded-Prefix, /auth-service
 
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/order-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /order-service
+
 
 springdoc:
   api-docs:
@@ -52,6 +60,8 @@ springdoc:
     urls:
       - name: Auth Service
         url: /auth-service/v3/api-docs
+      - name: Order Service
+        url: /order-service/v3/api-docs
 
 logging:
   level:

@@ -20,6 +20,8 @@ public class SecurityConfig {
                     ex -> ex
                     .pathMatchers("/auth/**", "/actuator/health", "/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
                     .pathMatchers("/auth-service/v3/api-docs/**", "/auth-service/auth/**").permitAll()
+                    .pathMatchers("/order-service/v3/api-docs/**", "/order-service/orders/**").permitAll()
+                    .pathMatchers("/product-service/v3/api-docs/**", "/product-service/products/**").permitAll()
                     .pathMatchers("/admin/**").hasRole("ADMIN")
                     .anyExchange().authenticated()
                 )

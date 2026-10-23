@@ -15,12 +15,12 @@ public class DataInitializer {
     @Bean 
     CommandLineRunner initAdmin(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            if (userRepository.existsByEmail("admin@fntech.com")) {
+            if (userRepository.existsByEmail("admin@marcialanches.com")) {
                 return;
             }
 
             User admin = User.builder()
-                .email("admin@fntech.com")
+                .email("admin@marcialanches.com")
                 .name("ADMIN")
                 .role(Role.ROLE_GESTOR)
                 .password(passwordEncoder.encode("admin"))

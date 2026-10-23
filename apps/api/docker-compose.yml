@@ -21,7 +21,7 @@ services:
   eureka:
     build:
       context: ./services/eureka
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8761:8761"
     networks:
@@ -30,7 +30,7 @@ services:
   auth-service:
     build:
       context: ./services/auth-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8071:8081"
     environment:
@@ -49,7 +49,7 @@ services:
   order-service:
     build:
       context: ./services/order-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8072:8082"
     environment:
@@ -68,7 +68,7 @@ services:
   gateway-service:
     build:
       context: ./services/gateway-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8070:8080"
     environment:
