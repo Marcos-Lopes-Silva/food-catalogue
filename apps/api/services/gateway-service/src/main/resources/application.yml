@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway,health,info
+
+spring:
+  application:
+    name: gateway-service
+
+  redis:
+    host: ${SPRING_DATA_REDIS_HOST:redis}
+    port: ${SPRING_DATA_REDIS_PORT:6379}
+  
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://auth-service:8080/.well-known/jwks.json
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          httpserver:
+            wiretap: true
+          httpclient:
+            wiretap: true
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /auth-service
+
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/order-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /order-service
+
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Auth Service
+        url: /auth-service/v3/api-docs
+      - name: Order Service
+        url: /order-service/v3/api-docs
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.route: DEBUG
+    reactor.netty: DEBUG
