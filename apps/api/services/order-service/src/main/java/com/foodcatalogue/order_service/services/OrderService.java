@@ -76,4 +76,20 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public ResponseOrder repeatOrder(UUID orderId, RequestOrder orderRequest) {
+        var originalOrder = this.orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado."));
+
+        var newOrder = Order.builder()
+                .customerName(originalOrder.getCustomerName())
+                .customerTel(originalOrder.getCustomerTel())
+                .totalPrice(originalOrder.getTotalPrice())
+                .items(originalOrder.getItems())
+                .build();
+
+        this.orderRepository.save(newOrder);
+
+        return ResponseOrder.fromEntity(newOrder);
+    }
+
 }
