@@ -4,37 +4,84 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka
+      defaultZone: ${EUREKA_URI:http://eureka:8761/eureka}
 
 management:
   endpoints:
     web:
       exposure:
-        include: gateway,health,info
+        include: health,info
 
 spring:
   application:
     name: gateway-service
 
-  redis:
-    host: ${SPRING_DATA_REDIS_HOST:redis}
-    port: ${SPRING_DATA_REDIS_PORT:6379}
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
   
   security:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://auth-service:8080/.well-known/jwks.json
+          jwk-set-uri: ${JWK_SET_URI:http://auth-service:8080/.well-known/jwks.json}
+          authorities-claim-name: roles
+          authority-prefix: ""
 
   cloud:
     gateway:
       server:
         webflux:
           httpserver:
-            wiretap: true
+            wiretap: false
           httpclient:
-            wiretap: true
+            wiretap: false
           routes:
+            - id: auth-login
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth-service/auth/login
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /auth-service
+                - name: RequestRateLimiter
+                  args:
+                    key-resolver: "#{@clientIpKeyResolver}"
+                    redis-rate-limiter.replenishRate: 1
+                    redis-rate-limiter.requestedTokens: 6
+                    redis-rate-limiter.burstCapacity: 60
+
+            - id: auth-register
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth-service/users
+                - Method=POST
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /auth-service
+                - name: RequestRateLimiter
+                  args:
+                    key-resolver: "#{@clientIpKeyResolver}"
+                    redis-rate-limiter.replenishRate: 1
+                    redis-rate-limiter.requestedTokens: 12
+                    redis-rate-limiter.burstCapacity: 60
+
+            - id: order-create
+              uri: lb://order-service
+              predicates:
+                - Path=/order-service/orders/create
+                - Method=POST
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /order-service
+                - name: RequestRateLimiter
+                  args:
+                    key-resolver: "#{@clientIpKeyResolver}"
+                    redis-rate-limiter.replenishRate: 1
+                    redis-rate-limiter.requestedTokens: 3
+                    redis-rate-limiter.burstCapacity: 30
+
             - id: auth-service
               uri: lb://auth-service
               predicates:
@@ -51,6 +98,54 @@ spring:
                 - StripPrefix=1
                 - AddRequestHeader=X-Forwarded-Prefix, /order-service
 
+            - id: products-service
+              uri: lb://products-service
+              predicates:
+                - Path=/products-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /products-service
+
+            - id: establishment-service
+              uri: lb://establishment-service
+              predicates:
+                - Path=/establishment-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /establishment-service
+
+            - id: payment-service
+              uri: lb://payment-service
+              predicates:
+                - Path=/payment-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /payment-service
+
+            - id: notification-service
+              uri: lb://notification-service
+              predicates:
+                - Path=/notification-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /notification-service
+
+            - id: review-service
+              uri: lb://review-service
+              predicates:
+                - Path=/review-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /review-service
+
+            - id: media-service
+              uri: lb://media-service
+              predicates:
+                - Path=/media-service/**
+              filters:
+                - StripPrefix=1
+                - AddRequestHeader=X-Forwarded-Prefix, /media-service
+
 
 springdoc:
   api-docs:
@@ -62,9 +157,20 @@ springdoc:
         url: /auth-service/v3/api-docs
       - name: Order Service
         url: /order-service/v3/api-docs
+      - name: Products Service
+        url: /products-service/v3/api-docs
+      - name: Establishment Service
+        url: /establishment-service/v3/api-docs
+      - name: Payment Service
+        url: /payment-service/v3/api-docs
+      - name: Notification Service
+        url: /notification-service/v3/api-docs
+      - name: Review Service
+        url: /review-service/v3/api-docs
+      - name: Media Service
+        url: /media-service/v3/api-docs
 
 logging:
   level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.gateway.route: DEBUG
-    reactor.netty: DEBUG
+    org.springframework.cloud.gateway: INFO
+    reactor.netty: INFO
