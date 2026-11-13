@@ -10,11 +10,11 @@ import com.foodcatalogue.order_service.models.Order;
 import lombok.Builder;
 
 @Builder 
-public record ResponseOrder(UUID id, String customerName, String customerTel, BigDecimal totalPrice, List<ResponseItemOrder> items) {
+public record ResponseOrder(UUID id, String customerName, UUID userId, String customerTel, BigDecimal totalPrice, List<ResponseItemOrder> items) {
     public static ResponseOrder fromEntity(Order order) {
         List<ResponseItemOrder> items = order.getItems().stream()
                 .map(ResponseItemOrder::fromEntity)
                 .collect(Collectors.toList());
-        return new ResponseOrder(order.getId(), order.getCustomerName(), order.getCustomerTel(), order.getTotalPrice(), items);
+        return new ResponseOrder(order.getId(), order.getCustomerName(), order.getUserId(), order.getCustomerTel(), order.getTotalPrice(), items);
     }
 }

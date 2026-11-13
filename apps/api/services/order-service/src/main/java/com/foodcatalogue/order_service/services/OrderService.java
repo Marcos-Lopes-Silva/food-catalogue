@@ -31,9 +31,10 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public ResponseOrder createOrder(RequestOrder orderRequest) {
+    public ResponseOrder createOrder(RequestOrder orderRequest, UUID userId) {
 
         var order = Order.builder()
+                .userId(userId)
                 .customerName(orderRequest.customerName())
                 .customerTel(orderRequest.customerTel())
                 .totalPrice(orderRequest.totalPrice())
@@ -76,16 +77,23 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public ResponseOrder repeatOrder(UUID orderId, RequestOrder orderRequest) {
+    public ResponseOrder repeatOrder(UUID orderId, UUID userId) {
         var originalOrder = this.orderRepository.findById(orderId)
+                .filter(order -> userId.equals(order.getUserId()))
                 .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado."));
 
         var newOrder = Order.builder()
+                .userId(userId)
                 .customerName(originalOrder.getCustomerName())
                 .customerTel(originalOrder.getCustomerTel())
                 .totalPrice(originalOrder.getTotalPrice())
-                .items(originalOrder.getItems())
                 .build();
+
+        originalOrder.getItems().forEach(item -> newOrder.addItem(OrderItem.builder()
+                .name(item.getName())
+                .price(item.getPrice())
+                .quantity(item.getQuantity())
+                .build()));
 
         this.orderRepository.save(newOrder);
 
