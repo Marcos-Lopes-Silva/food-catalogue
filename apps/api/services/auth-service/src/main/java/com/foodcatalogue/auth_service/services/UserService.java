@@ -39,11 +39,15 @@ public class UserService {
 
     public UserResponse registerUser(UserRequest userRequest) {
 
+        if (userRepository.existsByEmail(userRequest.email())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail já cadastrado");
+        }
+
         User user = User.builder()
             .email(userRequest.email())
             .password(passwordEncoder.encode(userRequest.password()))
             .name(userRequest.name())
-            .role(userRequest.role()).build();
+            .role(Role.ROLE_CLIENTE).build();
 
         User savedUser = userRepository.save(user);
 
@@ -59,7 +63,10 @@ public class UserService {
         
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        if (userEditRequest.email() != null) {
+        if (userEditRequest.email() != null && !userEditRequest.email().equals(user.getEmail())) {
+            if (userRepository.existsByEmail(userEditRequest.email())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail já cadastrado");
+            }
             user.setEmail(userEditRequest.email());
         } 
         

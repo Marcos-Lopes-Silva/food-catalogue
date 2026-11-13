@@ -1,6 +1,6 @@
 package com.foodcatalogue.auth_service.dto;
 
-import com.foodcatalogue.auth_service.models.Role;
+import jakarta.validation.constraints.Email;
 
-public record UserEditRequest(String email, String name, String password, Role role) {
+public record UserEditRequest(@Email String email, String name) {
 } 
