@@ -32,6 +32,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTOR')")
     public List<ResponseOrder> getOrders() {
         return orderService.getOrders();
     }
@@ -60,8 +62,8 @@ public class OrderController {
         return orderService.getOrdersByUserId(userId, page, size, sortBy, sortOrder);
     }
 
-    @PostMapping("/{orderId}/")
-    public ResponseOrder repeatOrder(@PathVariable UUID orderId, @RequestBody @Validated RequestOrder orderRequest, @AuthenticationPrincipal Jwt jwt) {
+    @PostMapping("/{orderId}/repeat")
+    public ResponseOrder repeatOrder(@PathVariable UUID orderId, @AuthenticationPrincipal Jwt jwt) {
         return orderService.repeatOrder(orderId, UUID.fromString(jwt.getSubject()));
     }
 
