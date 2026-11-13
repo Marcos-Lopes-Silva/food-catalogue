@@ -1,34 +1,24 @@
 package com.foodcatalogue.auth_service.controllers;
 
-import java.security.KeyPair;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 
-@RestController 
+@RestController
 public class JwksController {
 
-    private final KeyPair keyPair;
+    private final RSAKey jwtPublicJwk;
 
-    public JwksController(KeyPair keyPair) {
-        this.keyPair = keyPair;
+    public JwksController(RSAKey jwtPublicJwk) {
+        this.jwtPublicJwk = jwtPublicJwk;
     }
 
     @GetMapping ("/.well-known/jwks.json")
     public Map<String, Object> jwks() {
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .keyID("jwt-signing")
-                .algorithm(JWSAlgorithm.RS256)
-                .build();
-
-        return new JWKSet(rsaKey).toJSONObject();
+        return new JWKSet(jwtPublicJwk).toJSONObject();
     }
 }

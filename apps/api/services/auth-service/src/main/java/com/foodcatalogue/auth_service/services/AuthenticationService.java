@@ -10,9 +10,6 @@ import com.foodcatalogue.auth_service.dto.AuthenticationResponse;
 import com.foodcatalogue.auth_service.repositories.UserRepository;
 import com.foodcatalogue.auth_service.security.JwtTokenProvider;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
 public class AuthenticationService {
 
@@ -38,10 +35,7 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put("roles", user.getAuthorities());
-
-        var jwtToken = jwtTokenProvider.generateToken(extraClaims, user);
+        var jwtToken = jwtTokenProvider.generateToken(user);
 
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
